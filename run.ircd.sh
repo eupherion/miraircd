@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 # Определяем порт
 if [ -z "$1" ]; then
-    PORT=6668
+    PORT=6667
 else
     PORT="$1"
 fi

@@ -3,6 +3,11 @@
 Server::Server(int port, const std::string &password) :
 port(port), timeout(1), password(password)
 {
+	time_t now = time(0);
+    char buffer[100];
+    strftime(buffer, sizeof(buffer), "%a %b %d %H:%M:%S %Y", localtime(&now));
+    created = std::string(buffer);
+
 	commands["PASS"] = &Server::passCmd;
 	commands["NICK"] = &Server::nickCmd;
 	commands["USER"] = &Server::userCmd;

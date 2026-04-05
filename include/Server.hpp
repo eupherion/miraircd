@@ -9,6 +9,7 @@ class History;
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <unistd.h>
 #include <errno.h>
@@ -46,6 +47,7 @@ class Server
 		std::string								name;
 		std::string								info;
 		std::string								version;
+		std::string								created;
 		std::string								debuglvl;
 		std::string								comments;
 		std::string								describe;

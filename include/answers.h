@@ -1,5 +1,9 @@
 #pragma once
 
+#define RPL_WELCOME             001
+#define RPL_YOURHOST            002
+#define RPL_CREATED             003
+#define RPL_MYINFO              004
 #define ERR_NOSUCHNICK			401
 #define ERR_NOSUCHSERVER		402
 #define ERR_NOSUCHCHANNEL		403

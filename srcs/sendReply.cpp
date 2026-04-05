@@ -1,4 +1,6 @@
 #include "sendReply.hpp"
+#include <iomanip>
+#include <sstream>
 
 int		sendReply(const std::string &from, const User &user, int rpl, \
 				const std::string &arg1,const std::string &arg2, \
@@ -7,11 +9,31 @@ int		sendReply(const std::string &from, const User &user, int rpl, \
 				const std::string &arg7,const std::string &arg8)
 {
 	std::string	msg = ":" + from + " ";
-	std::stringstream	ss;
-	ss << rpl;
-	msg += ss.str() + " " + user.getNickname() + " ";
+	// std::stringstream	ss;
+	// ss << rpl;
+	// msg += ss.str() + " " + user.getNickname() + " ";
+	std::ostringstream oss;
+    oss << std::setw(3) << std::setfill('0') << rpl;
+    msg += oss.str() + " " + user.getNickname() + " ";
 	switch (rpl)
 	{
+	case RPL_WELCOME:
+    	// Формат: :<сервер> 001 <ник> :Welcome to the <сеть> <ник>!<юзер>@<хост>
+    	msg += ":Welcome to the " + arg1 + " Network " + user.getNickname() + "!";
+    	msg += user.getUsername() + "@" + user.getHostname() + "\n";
+    	break;
+	case RPL_YOURHOST: // 002 RPL_YOURHOST
+		// Format: :<server> 002 <nick> :Your host is <servername>, running version <version>
+		msg += ":Your host is " + arg1 + ", running version " + arg2 + "\n";
+		break;
+	case RPL_CREATED: // 003 RPL_CREATED
+		// Format: :<server> 003 <nick> :This server was created <date>
+		msg += ":This server was created " + arg1 + "\n";
+		break;
+	case RPL_MYINFO: // 004 RPL_MYINFO
+		// Format: :<server> 004 <nick> <servername> <version> <usermodes> <chanmodes>
+		msg += arg1 + " " + arg2 + " " + arg3 + " " + arg4 + "\n";
+		break;
 	case RPL_USERHOST:
 		msg += ":" + arg1 + "\n";
 		break;

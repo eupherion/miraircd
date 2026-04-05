@@ -23,6 +23,12 @@ int		Server::checkConnection(User &user)
 			if (!(user.getFlags() & REGISTERED))
 			{
 				user.setFlag(REGISTERED);
+				// Отправляем обязательные приветственные ответы ПОСЛЕДОВАТЕЛЬНО:
+    			sendReply(name, user, RPL_WELCOME, name);           // 001
+				// Опционально, но рекомендуется по RFC:
+				sendReply(name, user, RPL_YOURHOST, name, "ircd-1.0");  // 002
+				sendReply(name, user, RPL_CREATED, name, "Server created..."); // 003
+				sendReply(name, user, RPL_MYINFO, name, "ircd-1.0", "io", "io"); // 004
 				sendMOTD(user);
 			}
 		}
